@@ -22,7 +22,7 @@ equalCount n1 n2 n3
 getDivs :: Int -> Int -> [Int]
 getDivs num it
     | it == (num + 1)               = []
-    | mod num it == 0               = it : [] ++ getDivs num (it+1)
+    | mod num it == 0               = it : getDivs num (it+1)
     | otherwise                     = getDivs num (it+1)
 
 cmpDivs :: Int -> [Int] -> Int
