@@ -35,3 +35,23 @@ primosEntreSi :: Int -> Int -> Bool
 primosEntreSi a b
     | cmpDivs (max a b) (getDivs (min a b) 1) == 1         = True
     | otherwise                                            = False
+
+---------- listas ----------
+
+double :: [Int] -> [Int]
+double []     = []
+double (x:xs) = x*2 : double xs
+
+member :: [Int] -> Int -> Bool
+member [] a     = False
+member (x:xs) a = if(x == a) then True else member xs a
+
+digits :: String -> String
+digits []     = []
+digits (x:xs) = if(x >= '0' && x <= '9') then x : digits xs else digits xs
+
+sumPairs :: [Int] -> [Int] -> [Int]
+sumPairs [] []         = []
+sumPairs [] (x:xs)     = x : xs
+sumPairs (x:xs) []     = x : xs
+sumPairs (x:xs) (y:ys) = (x+y) : sumPairs xs ys
