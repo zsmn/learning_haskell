@@ -10,8 +10,8 @@ getRemainingLife (_, y) = y
 --
 
 -- utils
-removerVida :: (String, Int, Int) -> Int -> (String, Int, Int)
-removerVida at dec = (getName at, (getLife at) - dec, getPower at)
+setarVida :: (String, Int, Int) -> Int -> (String, Int, Int)
+setarVida at dec = (getName at, dec, getPower at)
 
 -- dps do cara : (myLife / theirPower)
 -- turnos q venci : (theirLife / myPower)
@@ -41,5 +41,5 @@ batalha t1 t2
     | t2 == []                                           = ("Ash", (head t1):[])
     | getLife (head t1) <= 0                             = batalha (tail t1) t2 
     | getLife (head t2) <= 0                             = batalha t1 (tail t2)
-    | getWin (ashVenceLuta (head t1) (head t2)) == True  = batalha ((removerVida (head t1) (getRemainingLife (ashVenceLuta (head t1) (head t2)))) : (tail t1)) (tail t2)
-    | getWin (ashVenceLuta (head t1) (head t2)) == False = batalha (tail t1) ((removerVida (head t2) (getRemainingLife (ashVenceLuta (head t1) (head t2)))) : (tail t2))
+    | getWin (ashVenceLuta (head t1) (head t2)) == True  = batalha ((setarVida (head t1) (getRemainingLife (ashVenceLuta (head t1) (head t2)))) : (tail t1)) (tail t2)
+    | getWin (ashVenceLuta (head t1) (head t2)) == False = batalha (tail t1) ((setarVida (head t2) (getRemainingLife (ashVenceLuta (head t1) (head t2)))) : (tail t2))
