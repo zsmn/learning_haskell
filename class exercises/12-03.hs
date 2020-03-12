@@ -28,3 +28,44 @@ bhaskara (a, b, c)
     | b^2 == (4.0 * a * c)             = ((-b + sqrt((b^2) - (4 * a * c))) / (2*a)) : []
     | b^2 < (4.0 * a * c)              = []
 
+
+
+---------------------- tuples
+
+-- verificar se um membro esta na lista
+listaMembros :: [Int]
+listaMembros = [1, 2, 3, 4, 5, 6, 7]
+
+membro :: [Int] -> Int -> Bool
+membro list id = length [a | a <- list, a == id] > 0
+
+-- verificar se um membro esta na lista
+
+-- banco de dados
+type Pessoa = String
+type Livro = String
+type BancoDados = [(Pessoa, Livro)]
+
+baseExemplo :: BancoDados  
+baseExemplo = 
+    [("Zilde", "As branquinhas"),
+     ("Zilde", "Kamasutra"),
+     ("Suruba", "Kamasutra"),
+     ("Pnc",  "Programando a morena"),
+     ("Riei", "Eu Robo"),
+     ("Ximenes", "50 tipos de gados")]
+
+livros :: BancoDados -> Pessoa -> [Livro]
+livros bdd person = [y | (x, y) <- bdd, x == person] 
+
+emprestimos :: BancoDados -> Livro -> [Pessoa]
+emprestimos bdd book = [x | (x, y) <- bdd, y == book]
+
+emprestado :: BancoDados -> Livro -> Bool
+emprestado bdd book = length [x | (x, y) <- bdd, y == book] > 0
+
+qtdEmprestimos :: BancoDados -> Pessoa -> Int
+qtdEmprestimos bdd person = length [x | (x, y) <- bdd, x == person]
+
+devolver :: BancoDados -> Pessoa -> Livro -> BancoDados
+devolver bdd person book = [(x, y) | (x, y) <- bdd, not (x == person && y == book)]
